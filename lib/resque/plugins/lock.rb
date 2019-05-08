@@ -81,10 +81,18 @@ module Resque
         ensure
           # Always clear the lock when we're done, even if there is an
           # error.
-          Resque.redis.del(lock(*args))
+          del_redis_lock(*args)
         end
+      end
+
+      # clear the lock key if the job was dequeued using Resque.dequeue
+      def after_dequeue_lock(*args)
+        del_redis_lock(*args)
+      end
+
+      def del_redis_lock(*args)
+        Resque.redis.del(lock(*args))
       end
     end
   end
 end
-

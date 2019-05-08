@@ -1,6 +1,14 @@
 Resque Lock
 ===========
 
+### THIS GEM IS NOT ACTIVELY MAINTAINED!
+
+Forked from [resque-lock](https://github.com/defunkt/resque-lock)
+
+Adds support for clearing `lock` keys if a job was removed using `Resque.dequeue`.
+
+Note: If you use any other way beside directly calling `Resque.dequeue` don't forget to clear the keys or else your job will be locked down for the `timeout` specified (default `3600` seconds).
+
 A [Resque][rq] plugin. Requires Resque 1.7.0.
 
 If you want only one instance of your job queued at a time, extend it
